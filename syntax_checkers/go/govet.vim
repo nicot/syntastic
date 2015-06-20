@@ -23,7 +23,7 @@ function! SyntaxCheckers_go_govet_IsAvailable() dict
 endfunction
 
 function! SyntaxCheckers_go_govet_GetLocList() dict
-    let makeprg = self.getExec() . ' vet'
+    let makeprg = self.getExec() . ' vet ' . expand('%:p')
 
     let errorformat =
         \ '%Evet: %.%\+: %f:%l:%c: %m,' .
@@ -37,7 +37,6 @@ function! SyntaxCheckers_go_govet_GetLocList() dict
     return SyntasticMake({
         \ 'makeprg': makeprg,
         \ 'errorformat': errorformat,
-        \ 'cwd': expand('%:p:h', 1),
         \ 'defaults': {'type': 'w'} })
 endfunction
 
